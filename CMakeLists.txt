@@ -21,6 +21,7 @@ include_directories(include/)
 
 set(SOURCES 
   src/SoundexTest.cpp
+  src/Soundex.cpp
 )
 
 add_executable(
