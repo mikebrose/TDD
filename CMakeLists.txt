@@ -20,19 +20,19 @@ enable_testing()
 include_directories(include/)
 
 set(SOURCES 
-  src/TestSuite.cpp
+  src/SoundexTest.cpp
 )
 
 add_executable(
-  TestSuite
+  SoundexTest
   ${SOURCES}
 )
 
 target_link_libraries(
-  TestSuite
+  SoundexTest
   GTest::gtest_main
   GTest::gmock_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(TestSuite)
+gtest_discover_tests(SoundexTest)
