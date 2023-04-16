@@ -8,6 +8,7 @@ public:
     Soundex() {};
 
     std::string Encode(const std::string& word) const;
+    std::string ZeroPad(const std::string& word) const;
 };
 
 #endif
