@@ -12,12 +12,10 @@ public:
 
 TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord){
    
-    auto encoded = soundex.Encode("A");
-    ASSERT_THAT(encoded, Eq("A000"));
+    ASSERT_THAT(soundex.Encode("A"), Eq("A000"));
 }
 
 TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 
-    auto encoded = soundex.Encode("I");
-    ASSERT_THAT(encoded, Eq("I000"));
+    ASSERT_THAT(soundex.Encode("I"), Eq("I000"));
 }
