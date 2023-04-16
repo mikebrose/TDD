@@ -3,12 +3,12 @@
 #include "Soundex.hpp"
 #include <string>
 
-using ::testing::Return;
-using ::testing::NiceMock;
+using testing::Eq;
 
 TEST(SoundexEncoding, RetainsSoleLetterOfOneLetterWord){
     Soundex soundex;
-    std::string result = soundex.Encode("b");
-    EXPECT_EQ(result, "b");
+    auto encoded = soundex.Encode("A");
+    ASSERT_THAT(encoded, Eq("A"));
 }
 
+ 
