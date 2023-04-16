@@ -21,5 +21,9 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 }
 
 TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits){
-    ASSERT_THAT(soundex.Encode("Ab"), Eq("A100"));
+    EXPECT_THAT(soundex.Encode("Ax"), Eq("A200"));
+}
+
+TEST_F(SoundexEncoding, IgnoresNonAlphabeticChars){
+    EXPECT_THAT(soundex.Encode("A#"), Eq("A000"));
 }
