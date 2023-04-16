@@ -21,9 +21,13 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 }
 
 TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits){
-    EXPECT_THAT(soundex.Encode("Ax"), Eq("A200"));
+    ASSERT_THAT(soundex.Encode("Acdl"), Eq("A234"));
 }
 
 TEST_F(SoundexEncoding, IgnoresNonAlphabeticChars){
-    EXPECT_THAT(soundex.Encode("A#"), Eq("A000"));
+    ASSERT_THAT(soundex.Encode("A#"), Eq("A000"));
+}
+
+TEST_F(SoundexEncoding, DISABLED_LimitsLengthToFourCharacters){
+    ASSERT_THAT(soundex.Encode("Dcdlb").length(), Eq(4U));
 }

@@ -4,20 +4,26 @@
 
 std::string Soundex::Encode(const std::string& word) const {
 
-    return ZeroPad(Head(word) + EncodeDigits(word));
+    return ZeroPad(Head(word) + EncodeDigits(Tail(word)));
 }
 
 std::string Soundex::Head(const std::string& word) const {
     return word.substr(0,1);
 }
 
+// Returns all of string after first character
+std::string Soundex::Tail(const std::string& word) const {
+    return word.substr(1);
+}
+
 std::string Soundex::EncodeDigits(const std::string& word) const {
-    
-    if (word.length() > 1){
-        //This will be more general soon
-        return EncodeDigit(word[1]);
+    std::string encoding;
+
+    for (auto letter : word){
+        encoding += EncodeDigit(letter);
     }
-    return "";
+    
+    return encoding;
 }
 
 std::string Soundex::EncodeDigit(char letter) const {

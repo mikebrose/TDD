@@ -14,6 +14,7 @@ private:
     std::string EncodeDigits(const std::string& word) const;
     std::string EncodeDigit(char letter) const;
     std::string ZeroPad(const std::string& word) const;
+    std::string Tail(const std::string& word) const;
 };
 
 #endif
