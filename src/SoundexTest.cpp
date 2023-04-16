@@ -19,3 +19,7 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 
     ASSERT_THAT(soundex.Encode("I"), Eq("I000"));
 }
+
+TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits){
+    ASSERT_THAT(soundex.Encode("Ab"), Eq("A100"));
+}

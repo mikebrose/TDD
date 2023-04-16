@@ -3,11 +3,16 @@
 
 #include <string>
 
+static const uint MAX_CODE_LENGTH = 4;
 class Soundex {
 public:
     Soundex() {};
-
     std::string Encode(const std::string& word) const;
+
+private:
+    std::string Head(const std::string& word) const;
+    std::string EncodeDigits(const std::string& word) const;
+    std::string EncodeDigit() const;
     std::string ZeroPad(const std::string& word) const;
 };
 
