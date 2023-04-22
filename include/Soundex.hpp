@@ -15,6 +15,7 @@ private:
     std::string EncodeDigit(char letter) const;
     std::string ZeroPad(const std::string& word) const;
     std::string Tail(const std::string& word) const;
+    bool IsComplete(const std::string& encoding) const;
 };
 
 #endif

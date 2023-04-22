@@ -18,8 +18,10 @@ std::string Soundex::Tail(const std::string& word) const {
 
 std::string Soundex::EncodeDigits(const std::string& word) const {
     std::string encoding;
-
     for (auto letter : word){
+        if (IsComplete(encoding)){
+            break;
+        }
         encoding += EncodeDigit(letter);
     }
     
@@ -49,6 +51,10 @@ std::string Soundex::EncodeDigit(char letter) const {
     } else {
         return it->second;
     }
+}
+
+bool Soundex::IsComplete(const std::string& encoding) const {
+    return (encoding.length() >= (MAX_CODE_LENGTH - 1));
 }
 
 

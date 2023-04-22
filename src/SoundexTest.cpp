@@ -28,6 +28,6 @@ TEST_F(SoundexEncoding, IgnoresNonAlphabeticChars){
     ASSERT_THAT(soundex.Encode("A#"), Eq("A000"));
 }
 
-TEST_F(SoundexEncoding, DISABLED_LimitsLengthToFourCharacters){
+TEST_F(SoundexEncoding, LimitsLengthToFourCharacters){
     ASSERT_THAT(soundex.Encode("Dcdlb").length(), Eq(4U));
 }
