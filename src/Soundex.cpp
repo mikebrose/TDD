@@ -25,25 +25,27 @@ std::string Soundex::EncodeDigits(const std::string& word) const {
 }
 
 void Soundex::EncodeHead(std::string& encoding, const std::string& word) const {
-     encoding += EncodeDigit(word.front());
+     encoding += MapLetterToDigit(word.front());
 }
 
 void Soundex::EncodeTail(std::string& encoding, const std::string& word) const {
     for (auto letter : Tail(word)){
-        if (IsComplete(encoding)){
-            break;
+        if (!IsComplete(encoding)){
+            EncodeLetter(encoding, letter);
         }
-
-        std::string new_encoding = EncodeDigit(letter);
-        // Will not add to the encoding if it wasn't a valid digit,
-        // or is already at Max Code Length
-        if ((new_encoding != NotADigit) && (new_encoding != LastEncoding(encoding))){
-            encoding += new_encoding;
-        }    
     }
 }
 
-std::string Soundex::EncodeDigit(char letter) const {
+void Soundex::EncodeLetter(std::string &encoding, char letter) const {
+    std::string new_encoding = MapLetterToDigit(letter);
+    // Will not add to the encoding if it wasn't a valid digit,
+    // or is already at Max Code Length
+    if ((new_encoding != NotADigit) && (new_encoding != LastEncoding(encoding))){
+        encoding += new_encoding;
+    }    
+}
+
+std::string Soundex::MapLetterToDigit(char letter) const {
     const std::unordered_map<char, std::string> encodings {
         {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"}, 
 
@@ -90,3 +92,4 @@ std::string Soundex::UpperFront(const std::string& letter) const {
     return std::string(1,
         std::toupper(static_cast<unsigned char>(letter.front())));
 }
+

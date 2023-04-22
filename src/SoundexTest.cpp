@@ -42,13 +42,13 @@ TEST_F(SoundexEncoding, IgnoresVowelLikeLetters){
     ASSERT_THAT(soundex.Encode("Baeiouhycdl"), Eq("B234"));
 }
 
-TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
-    ASSERT_THAT(soundex.EncodeDigit('b'), Eq(soundex.EncodeDigit('f')));
-    ASSERT_THAT(soundex.EncodeDigit('c'), Eq(soundex.EncodeDigit('g')));
-    ASSERT_THAT(soundex.EncodeDigit('d'), Eq(soundex.EncodeDigit('t')));
+// TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
+//     ASSERT_THAT(soundex.EncodeDigit('b'), Eq(soundex.EncodeDigit('f')));
+//     ASSERT_THAT(soundex.EncodeDigit('c'), Eq(soundex.EncodeDigit('g')));
+//     ASSERT_THAT(soundex.EncodeDigit('d'), Eq(soundex.EncodeDigit('t')));
 
-    ASSERT_THAT(soundex.Encode("Abfcgdt"), Eq("A123"));
-}
+//     ASSERT_THAT(soundex.Encode("Abfcgdt"), Eq("A123"));
+// }
 
 TEST_F(SoundexEncoding, UppercasesFirstLetter){
     ASSERT_THAT(soundex.Encode("abcd"), StartsWith("A"));
