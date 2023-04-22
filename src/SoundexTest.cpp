@@ -61,3 +61,11 @@ TEST_F(SoundexEncoding, RemainsUppercasedFirstLetter){
 TEST_F(SoundexEncoding, IgnoresUpperAndLowerCaseVowelLikeLetters){
     ASSERT_THAT(soundex.Encode("BaAeEiIoOuUhHyYcdl"), Eq("B234"));
 }
+
+TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants){
+    ASSERT_THAT(soundex.Encode("BCDL"), Eq(soundex.Encode("Bcdl")));
+}
+
+TEST_F(SoundexEncoding, DISABLED_CombinesDuplicateCodesWhen2ndLetterDuplicates1st){
+    ASSERT_THAT(soundex.Encode("Bbcd"), Eq("B230"));
+}

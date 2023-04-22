@@ -11,6 +11,8 @@ public:
     std::string EncodeDigit(char letter) const;
 
 private:
+    void EncodeHead(std::string& encoding, const std::string& word) const;
+    void EncodeTail(std::string& encoding, const std::string& word) const;
     std::string Head(const std::string& word) const;
     std::string EncodeDigits(const std::string& word) const;
     std::string ZeroPad(const std::string& word) const;

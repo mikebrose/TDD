@@ -5,7 +5,7 @@
 
 std::string Soundex::Encode(const std::string& word) const {
 
-    return ZeroPad(UpperFront(Head(word)) + EncodeDigits(Tail(word)));
+    return ZeroPad(UpperFront(Head(word)) + Tail(EncodeDigits(word)));
 }
 
 std::string Soundex::Head(const std::string& word) const {
@@ -19,7 +19,17 @@ std::string Soundex::Tail(const std::string& word) const {
 
 std::string Soundex::EncodeDigits(const std::string& word) const {
     std::string encoding;
-    for (auto letter : word){
+    EncodeHead(encoding, word);
+    EncodeTail(encoding, word);
+    return encoding;
+}
+
+void Soundex::EncodeHead(std::string& encoding, const std::string& word) const {
+     encoding += EncodeDigit(word.front());
+}
+
+void Soundex::EncodeTail(std::string& encoding, const std::string& word) const {
+    for (auto letter : Tail(word)){
         if (IsComplete(encoding)){
             break;
         }
@@ -31,7 +41,6 @@ std::string Soundex::EncodeDigits(const std::string& word) const {
             encoding += new_encoding;
         }    
     }
-    return encoding;
 }
 
 std::string Soundex::EncodeDigit(char letter) const {
@@ -51,7 +60,8 @@ std::string Soundex::EncodeDigit(char letter) const {
     };
 
     //will be end() if didnt find it
-    auto it = encodings.find(letter);
+    auto lower_letter = std::tolower(static_cast<unsigned char>(letter));
+    auto it = encodings.find(lower_letter);
     if (it == encodings.end()){
         return NotADigit;
     } else {
@@ -60,7 +70,7 @@ std::string Soundex::EncodeDigit(char letter) const {
 }
 
 bool Soundex::IsComplete(const std::string& encoding) const {
-    return (encoding.length() >= (MAX_CODE_LENGTH - 1));
+    return (encoding.length() >= (MAX_CODE_LENGTH));
 }
 
 
