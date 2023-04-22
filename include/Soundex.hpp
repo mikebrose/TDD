@@ -19,6 +19,8 @@ private:
     std::string LastEncoding(const std::string& encoding) const;
     std::string UpperFront(const std::string& letter) const;
     std::string last_encoding;
+
+    const std::string NotADigit{"*"};
 };
 
 #endif

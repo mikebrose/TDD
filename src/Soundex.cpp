@@ -25,7 +25,9 @@ std::string Soundex::EncodeDigits(const std::string& word) const {
         }
 
         std::string new_encoding = EncodeDigit(letter);
-        if (new_encoding != LastEncoding(encoding)){
+        // Will not add to the encoding if it wasn't a valid digit,
+        // or is already at Max Code Length
+        if ((new_encoding != NotADigit) && (new_encoding != LastEncoding(encoding))){
             encoding += new_encoding;
         }    
     }
@@ -51,7 +53,7 @@ std::string Soundex::EncodeDigit(char letter) const {
     //will be end() if didnt find it
     auto it = encodings.find(letter);
     if (it == encodings.end()){
-        return "";
+        return NotADigit;
     } else {
         return it->second;
     }
@@ -69,7 +71,7 @@ std::string Soundex::ZeroPad(const std::string& word) const {
 
 std::string Soundex::LastEncoding(const std::string& encoding) const {
     if (encoding.empty()) {
-        return "";
+        return NotADigit;
     }
     else return std::string(1, encoding.back());
 }

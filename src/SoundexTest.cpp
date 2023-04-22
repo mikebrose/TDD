@@ -57,3 +57,7 @@ TEST_F(SoundexEncoding, UppercasesFirstLetter){
 TEST_F(SoundexEncoding, RemainsUppercasedFirstLetter){
     ASSERT_THAT(soundex.Encode("Abcd"), StartsWith("A"));
 }
+
+TEST_F(SoundexEncoding, IgnoresUpperAndLowerCaseVowelLikeLetters){
+    ASSERT_THAT(soundex.Encode("BaAeEiIoOuUhHyYcdl"), Eq("B234"));
+}
