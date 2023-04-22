@@ -1,10 +1,11 @@
 #include "Soundex.hpp"
 #include <string>
+#include <cstring>
 #include <unordered_map>
 
 std::string Soundex::Encode(const std::string& word) const {
 
-    return ZeroPad(Head(word) + EncodeDigits(Tail(word)));
+    return ZeroPad(UpperFront(Head(word)) + EncodeDigits(Tail(word)));
 }
 
 std::string Soundex::Head(const std::string& word) const {
@@ -22,9 +23,12 @@ std::string Soundex::EncodeDigits(const std::string& word) const {
         if (IsComplete(encoding)){
             break;
         }
-        encoding += EncodeDigit(letter);
+
+        std::string new_encoding = EncodeDigit(letter);
+        if (new_encoding != LastEncoding(encoding)){
+            encoding += new_encoding;
+        }    
     }
-    
     return encoding;
 }
 
@@ -47,7 +51,7 @@ std::string Soundex::EncodeDigit(char letter) const {
     //will be end() if didnt find it
     auto it = encodings.find(letter);
     if (it == encodings.end()){
-        return "0";
+        return "";
     } else {
         return it->second;
     }
@@ -58,10 +62,19 @@ bool Soundex::IsComplete(const std::string& encoding) const {
 }
 
 
-
-
 std::string Soundex::ZeroPad(const std::string& word) const {
     auto zerosNeeded = MAX_CODE_LENGTH - word.length();
     return word + std::string(zerosNeeded, '0');
 }
 
+std::string Soundex::LastEncoding(const std::string& encoding) const {
+    if (encoding.empty()) {
+        return "";
+    }
+    else return std::string(1, encoding.back());
+}
+
+std::string Soundex::UpperFront(const std::string& letter) const {
+    return std::string(1,
+        std::toupper(static_cast<unsigned char>(letter.front())));
+}
