@@ -66,6 +66,10 @@ TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants){
     ASSERT_THAT(soundex.Encode("BCDL"), Eq(soundex.Encode("Bcdl")));
 }
 
-TEST_F(SoundexEncoding, DISABLED_CombinesDuplicateCodesWhen2ndLetterDuplicates1st){
+TEST_F(SoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st){
     ASSERT_THAT(soundex.Encode("Bbcd"), Eq("B230"));
+}
+
+TEST_F(SoundexEncoding, DoesNotCombineDuplicateEncodinngsSeparatedByVowels){
+    ASSERT_THAT(soundex.Encode("Jbob"), Eq("J110"));
 }

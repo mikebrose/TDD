@@ -29,20 +29,25 @@ void Soundex::EncodeHead(std::string& encoding, const std::string& word) const {
 }
 
 void Soundex::EncodeTail(std::string& encoding, const std::string& word) const {
-    for (auto letter : Tail(word)){
+    for (uint i = 1u; i < word.length(); i++){
         if (!IsComplete(encoding)){
-            EncodeLetter(encoding, letter);
+            EncodeLetter(encoding, word[i], word[i-1]);
         }
     }
 }
 
-void Soundex::EncodeLetter(std::string &encoding, char letter) const {
+void Soundex::EncodeLetter(std::string &encoding, char letter, 
+    char last_letter) const {
+
     std::string new_encoding = MapLetterToDigit(letter);
-    // Will not add to the encoding if it wasn't a valid digit,
-    // or is already at Max Code Length
-    if ((new_encoding != NotADigit) && (new_encoding != LastEncoding(encoding))){
+    if ( (new_encoding != NotADigit) &&
+         ((new_encoding != LastEncoding(encoding)) || IsVowel(last_letter))) {
         encoding += new_encoding;
     }    
+}
+
+bool Soundex::IsVowel(const char letter) const {
+    return (std::string("aeiouy").find(std::tolower(letter)) != std::string::npos);
 }
 
 std::string Soundex::MapLetterToDigit(char letter) const {

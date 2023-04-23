@@ -17,10 +17,11 @@ private:
     void EncodeTail(std::string &encoding, const std::string &word) const;
     std::string Head(const std::string &word) const;
     std::string EncodeDigits(const std::string &word) const;
-    void EncodeLetter(std::string &encoding, char letter) const;
+    void EncodeLetter(std::string &encoding, char letter, char last_letter) const;
     std::string ZeroPad(const std::string &word) const;
     std::string Tail(const std::string &word) const;
     bool IsComplete(const std::string &encoding) const;
+    bool IsVowel(const char letter) const;
     std::string LastEncoding(const std::string &encoding) const;
     std::string UpperFront(const std::string &letter) const;
     std::string last_encoding;
