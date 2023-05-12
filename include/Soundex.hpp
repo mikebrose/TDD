@@ -8,25 +8,25 @@ class Soundex
 {
 public:
     Soundex(){};
-    std::string Encode(const std::string &word) const;
-    std::string MapLetterToDigit(char letter) const;
-    std::string MyFunction(const std::string &letter) const;
+    std::string encode(const std::string &word) const;
+    std::string mapLetterToDigit(char letter) const;
+    std::string myFunction(const std::string &letter) const;
 
 private:
-    void EncodeHead(std::string &encoding, const std::string &word) const;
-    void EncodeTail(std::string &encoding, const std::string &word) const;
-    std::string Head(const std::string &word) const;
-    std::string EncodeDigits(const std::string &word) const;
-    void EncodeLetter(std::string &encoding, char letter, char last_letter) const;
-    std::string ZeroPad(const std::string &word) const;
-    std::string Tail(const std::string &word) const;
-    bool IsComplete(const std::string &encoding) const;
-    bool IsVowel(const char letter) const;
-    std::string LastEncoding(const std::string &encoding) const;
-    std::string UpperFront(const std::string &letter) const;
-    std::string last_encoding;
+    void encodeHead(std::string &encoding, const std::string &word) const;
+    void encodeTail(std::string &encoding, const std::string &word) const;
+    std::string head(const std::string &word) const;
+    std::string encodeDigits(const std::string &word) const;
+    void encodeLetter(std::string &encoding, char letter, char last_letter) const;
+    std::string zeroPad(const std::string &word) const;
+    std::string tail(const std::string &word) const;
+    bool isComplete(const std::string &encoding) const;
+    bool isVowel(const char letter) const;
+    std::string lastEncoding(const std::string &encoding) const;
+    std::string upperFront(const std::string &letter) const;
 
-    const std::string NotADigit{"*"};
+    std::string last_encoding;
+    const std::string NOT_A_DIGIT{"*"};
 };
 
 #endif

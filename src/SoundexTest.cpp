@@ -14,62 +14,54 @@ public:
 
 TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord){
    
-    ASSERT_THAT(soundex.Encode("A"), Eq("A000"));
+    ASSERT_THAT(soundex.encode("A"), Eq("A000"));
 }
 
 TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 
-    ASSERT_THAT(soundex.Encode("I"), Eq("I000"));
+    ASSERT_THAT(soundex.encode("I"), Eq("I000"));
 }
 
 TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits){
-    ASSERT_THAT(soundex.Encode("Acdl"), Eq("A234"));
+    ASSERT_THAT(soundex.encode("Acdl"), Eq("A234"));
 }
 
 TEST_F(SoundexEncoding, IgnoresNonAlphabeticChars){
-    ASSERT_THAT(soundex.Encode("A#"), Eq("A000"));
+    ASSERT_THAT(soundex.encode("A#"), Eq("A000"));
 }
 
 TEST_F(SoundexEncoding, IgnoresNonAlphabeticCharsButContinues){
-    ASSERT_THAT(soundex.Encode("A#c"), Eq("A200"));
+    ASSERT_THAT(soundex.encode("A#c"), Eq("A200"));
 }
 
 TEST_F(SoundexEncoding, LimitsLengthToFourCharacters){
-    ASSERT_THAT(soundex.Encode("Dcdlb").length(), Eq(4U));
+    ASSERT_THAT(soundex.encode("Dcdlb").length(), Eq(4U));
 }
 
 TEST_F(SoundexEncoding, IgnoresVowelLikeLetters){
-    ASSERT_THAT(soundex.Encode("Baeiouhycdl"), Eq("B234"));
+    ASSERT_THAT(soundex.encode("Baeiouhycdl"), Eq("B234"));
 }
 
-// TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
-//     ASSERT_THAT(soundex.EncodeDigit('b'), Eq(soundex.EncodeDigit('f')));
-//     ASSERT_THAT(soundex.EncodeDigit('c'), Eq(soundex.EncodeDigit('g')));
-//     ASSERT_THAT(soundex.EncodeDigit('d'), Eq(soundex.EncodeDigit('t')));
-
-//     ASSERT_THAT(soundex.Encode("Abfcgdt"), Eq("A123"));
-// }
-
 TEST_F(SoundexEncoding, UppercasesFirstLetter){
-    ASSERT_THAT(soundex.Encode("abcd"), StartsWith("A"));
+    ASSERT_THAT(soundex.encode("abcd"), StartsWith("A"));
 }
 
 TEST_F(SoundexEncoding, RemainsUppercasedFirstLetter){
-    ASSERT_THAT(soundex.Encode("Abcd"), StartsWith("A"));
+    ASSERT_THAT(soundex.encode("Abcd"), StartsWith("A"));
 }
 
 TEST_F(SoundexEncoding, IgnoresUpperAndLowerCaseVowelLikeLetters){
-    ASSERT_THAT(soundex.Encode("BaAeEiIoOuUhHyYcdl"), Eq("B234"));
+    ASSERT_THAT(soundex.encode("BaAeEiIoOuUhHyYcdl"), Eq("B234"));
 }
 
 TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants){
-    ASSERT_THAT(soundex.Encode("BCDL"), Eq(soundex.Encode("Bcdl")));
+    ASSERT_THAT(soundex.encode("BCDL"), Eq(soundex.encode("Bcdl")));
 }
 
 TEST_F(SoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st){
-    ASSERT_THAT(soundex.Encode("Bbcd"), Eq("B230"));
+    ASSERT_THAT(soundex.encode("Bbcd"), Eq("B230"));
 }
 
 TEST_F(SoundexEncoding, DoesNotCombineDuplicateEncodinngsSeparatedByVowels){
-    ASSERT_THAT(soundex.Encode("Jbob"), Eq("J110"));
+    ASSERT_THAT(soundex.encode("Jbob"), Eq("J110"));
 }
